@@ -1,4 +1,4 @@
-angular.module('app').factory('coverAuth', function ($http, $q, $modal,
+angular.module('sbAdminApp').factory('coverAuth', function ($http, $q, $modal,
                                                        $rootScope, JsonApiOrg) {
 
   var currentUserChangedCallbacks = [];
@@ -54,7 +54,7 @@ angular.module('app').factory('coverAuth', function ($http, $q, $modal,
         loginPromise = $q.when(user);
       } else {
         loginPromise = $modal.open({
-            templateUrl : 'views/partials/login.html',
+            templateUrl : 'views/pages/login.html',
             backdrop : 'static',
             keyboard : false,
             size : 'sm',

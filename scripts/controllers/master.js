@@ -1,4 +1,4 @@
-angular.module('app').controller('MasterCtrl', function ($scope, coverAuth) {
+angular.module('sbAdminApp').controller('MasterCtrl', function ($scope, coverAuth) {
   $scope.login = coverAuth.login;
   $scope.logout = coverAuth.logout;
   $scope.autoLogin = coverAuth.autoLogin;
