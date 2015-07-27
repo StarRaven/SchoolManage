@@ -103,6 +103,11 @@ angular
         url:'/teacher/addTeacher',
         controller:'teacherAddCtrl',
     })
+    .state('dashboard.listTeacher',{
+      templateUrl:'views/teacher/teacher_list.html',
+      url:'/teacher/listTeacher',
+      controller:'teacherListCtrl',
+    })
       .state('login',{
         templateUrl:'views/pages/login.html',
         url:'/login'

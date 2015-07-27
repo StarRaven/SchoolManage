@@ -6,20 +6,20 @@
                 <a ui-sref="dashboard.home"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
 
-
-            <li ng-class="{active:collapseVar==4}">
-                <a href="" ng-click="check(4)"><i class="fa fa-files-o fa-fw"></i> 教师管理<span
+            <li ng-class="{active: collapseVar==1}">{{dropDown}}
+                <a href="" ng-click="check(1)"><i class="fa fa-wrench fa-fw"></i> 教师管理<span
                         class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" collapse="collapseVar!=4">
-                    <li ng-class="{active: selectedMenu=='blank'}">
-                        <a ui-sref="dashboard.addTeacher" ng-click="selectedMenu='blank'"> 添加教师</a>
+                <ul class="nav nav-second-level" collapse="collapseVar!=1">
+                    <li ui-sref-active="active">
+                        <a ui-sref="dashboard.addTeacher">添加教师</a>
                     </li>
-                    <li>
-                        <a ui-sref="login">Login Page</a>
+                    <li ui-sref-active="active">
+                        <a ui-sref="dashboard.listTeacher">教师列表</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
+
             <li><a href="http://www.strapui.com/">Premium Angular Themes</a></li>
         </ul>
     </div>

@@ -86,3 +86,7 @@ background-color: #eee;
 td {
   vertical-align: middle !important;
 }
+
+select[multiple], select[size] {
+    height: 704px;
+}
