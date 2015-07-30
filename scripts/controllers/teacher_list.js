@@ -20,8 +20,8 @@ function ($scope, $http, $state, $modal, $timeout, Restangular) {
 
     $scope.assign = function() {
       $modal.open({
-          templateUrl : 'views/teacher/teacher_major_course.html',
-          controller: 'teacherAssignCtrl',
+          templateUrl : 'views/teacher/teacher_course.html',
+          controller: 'teacherCourseCtrl',
           backdrop : 'static',
           keyboard : false,
           resolve: {
@@ -30,6 +30,9 @@ function ($scope, $http, $state, $modal, $timeout, Restangular) {
                     },
                     teacher: function () {
                       return $scope.user;
+                    },
+                    currentUser: function () {
+                      return $scope.currentUser;
                     }
                 }
         })
