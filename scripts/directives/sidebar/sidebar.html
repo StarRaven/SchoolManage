@@ -19,6 +19,19 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
+            <li ng-class="{active: collapseVar==1}">{{dropDown}}
+                <a href="" ng-click="check(1)"><i class="fa fa-wrench fa-fw"></i> 学生管理<span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level" collapse="collapseVar!=1">
+                    <li ui-sref-active="active">
+                        <a ui-sref="dashboard.addStudent">添加学生</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="dashboard.listStudent">学生列表</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
 
             <li><a href="http://www.strapui.com/">Premium Angular Themes</a></li>
         </ul>

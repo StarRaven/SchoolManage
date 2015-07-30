@@ -110,6 +110,7 @@ angular.module('sbAdminApp').factory('coverAuth', function ($http, $q, $modal,
     }}).then(function () {
       delete localStorage['accessToken'];
       coverAuth.setCurrentUser(null);
+      loginPromise = null;
     });
   }
 });
