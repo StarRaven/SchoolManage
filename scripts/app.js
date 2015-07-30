@@ -108,6 +108,11 @@ angular
       url:'/teacher/listTeacher',
       controller:'teacherListCtrl',
     })
+    .state('dashboard.addStudent',{
+        templateUrl:'views/student/student_add.html',
+        url:'/student/addStudent',
+        controller:'studentAddCtrl',
+    })
       .state('login',{
         templateUrl:'views/pages/login.html',
         url:'/login'
