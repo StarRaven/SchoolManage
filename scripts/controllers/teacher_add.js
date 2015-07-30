@@ -1,10 +1,15 @@
 angular.module('sbAdminApp')
 .controller('teacherAddCtrl',
 function ($scope, $http, $state, $timeout, Restangular) {
-  console.log($scope.currentUser);
+  $scope.login().then(function (){
+  $scope.school = $scope.currentUser.$related.school;
+  $scope.majors = Restangular.all('schools/'+$scope.school.$id.toString()+'/majors').getList().$object;
   var original;
   return $scope.user = {
       $type: "teacher",
+      $relationships: {
+        school: {data:$scope.school.$asLink()},
+      },
       username: "",
       password: "",
       email: "",
@@ -30,12 +35,16 @@ function ($scope, $http, $state, $timeout, Restangular) {
       return $scope.form_signin.$valid && !angular.equals($scope.user, original)
   },
   $scope.submitForm = function() {
-      console.log($scope.user);
+    console.log($scope.major);
+    $scope.user.$relationships.major = {data:$scope.major.$asLink()};
+    console.log($scope.user);
+
+
       Restangular.all('teachers').post($scope.user).then(function (question) {
           alert("新增老师成功");
           return $scope.showInfoOnSubmit = !0,
           $scope.revert();
         });
   };
-
+});
 });
