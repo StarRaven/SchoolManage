@@ -22,7 +22,7 @@ function ($scope, $http, $state, $timeout, Restangular) {
       credit: "",
       level: "",
       address: "",
-      newgender:""
+      gendername:""
   },
   $scope.showInfoOnSubmit = !1,
   original = angular.copy($scope.user),
@@ -38,7 +38,7 @@ function ($scope, $http, $state, $timeout, Restangular) {
   },
   $scope.submitForm = function() {
     console.log($scope.user);
-    if($scope.user.newgender == '男')
+    if($scope.user.gendername == '男')
       $scope.user.gender = 1;
     else
       $scope.user.gender = 2;
