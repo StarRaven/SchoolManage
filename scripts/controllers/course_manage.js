@@ -27,8 +27,8 @@ function ($scope, $http, $state, $modal, $timeout, Restangular) {
     };
     $scope.assign = function() {
       $modal.open({
-          templateUrl : 'views/student/student_major_course.html',
-          controller: 'studentAssignCtrl',
+          templateUrl : 'views/student/student_course.html',
+          controller: 'studentCourseCtrl',
           backdrop : 'static',
           keyboard : false,
           resolve: {
@@ -37,6 +37,9 @@ function ($scope, $http, $state, $modal, $timeout, Restangular) {
                     },
                     student: function () {
                       return $scope.user;
+                    },
+                    currentUser: function () {
+                      return $scope.currentUser;
                     }
                 }
         })
