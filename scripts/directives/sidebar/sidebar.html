@@ -14,26 +14,38 @@
                         <a ui-sref="dashboard.addTeacher">添加教师</a>
                     </li>
                     <li ui-sref-active="active">
-                        <a ui-sref="dashboard.listTeacher">教师列表</a>
+                        <a ui-sref="dashboard.manageTeacher">详细管理</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
-            <li ng-class="{active: collapseVar==1}">{{dropDown}}
-                <a href="" ng-click="check(1)"><i class="fa fa-wrench fa-fw"></i> 学生管理<span
+            <li ng-class="{active: collapseVar==2}">{{dropDown}}
+                <a href="" ng-click="check(2)"><i class="fa fa-wrench fa-fw"></i> 学生管理<span
                         class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" collapse="collapseVar!=1">
+                <ul class="nav nav-second-level" collapse="collapseVar!=2">
                     <li ui-sref-active="active">
                         <a ui-sref="dashboard.addStudent">添加学生</a>
                     </li>
                     <li ui-sref-active="active">
-                        <a ui-sref="dashboard.listStudent">学生列表</a>
+                        <a ui-sref="dashboard.manageStudent">详细管理</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li ng-class="{active: collapseVar==3}">{{dropDown}}
+                <a href="" ng-click="check(3)"><i class="fa fa-wrench fa-fw"></i> 课程管理<span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level" collapse="collapseVar!=3">
+                    <li ui-sref-active="active">
+                        <a ui-sref="dashboard.buyCourse">购买课程</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="dashboard.listStudent">详细管理</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
 
-            <li><a href="http://www.strapui.com/">Premium Angular Themes</a></li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

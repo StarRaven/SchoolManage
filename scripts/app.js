@@ -103,20 +103,30 @@ angular
         url:'/teacher/addTeacher',
         controller:'teacherAddCtrl',
     })
-    .state('dashboard.listTeacher',{
-      templateUrl:'views/teacher/teacher_list.html',
-      url:'/teacher/listTeacher',
-      controller:'teacherListCtrl',
+    .state('dashboard.manageTeacher',{
+      templateUrl:'views/teacher/teacher_manage.html',
+      url:'/teacher/manageTeacher',
+      controller:'teacherManageCtrl',
     })
     .state('dashboard.addStudent',{
         templateUrl:'views/student/student_add.html',
         url:'/student/addStudent',
         controller:'studentAddCtrl',
     })
-    .state('dashboard.listStudent',{
-      templateUrl:'views/student/student_list.html',
-      url:'/student/listStudent',
-      controller:'studentListCtrl',
+    .state('dashboard.manageStudent',{
+      templateUrl:'views/student/student_manage.html',
+      url:'/student/manageStudent',
+      controller:'studentManageCtrl',
+    })
+    .state('dashboard.buyCourse',{
+        templateUrl:'views/course/course_buy.html',
+        url:'/course/buyCourse',
+        controller:'courseBuyCtrl',
+    })
+    .state('dashboard.manageCourse',{
+      templateUrl:'views/course/course_manage.html',
+      url:'/course/manageCourse',
+      controller:'courseManageCtrl',
     })
       .state('login',{
         templateUrl:'views/pages/login.html',

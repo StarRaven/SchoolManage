@@ -1,10 +1,10 @@
 angular.module('sbAdminApp')
-.controller('studentListCtrl',
+.controller('courseManageCtrl',
 function ($scope, $http, $state, $modal, $timeout, Restangular) {
   $scope.login().then(function (){
     $scope.school = $scope.currentUser.$related.school;
     $scope.students=Restangular.all('schools/'+$scope.school.$id.toString()+'/students').getList().$object;
-    
+
     console.log($scope.students);
 
     $scope.update = function() {
