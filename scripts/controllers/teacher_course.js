@@ -8,8 +8,11 @@ function ($scope, $http, $state, $timeout, $modalInstance, Restangular, school, 
     $scope.school = school;
     $scope.teacher = teacher;
     $scope.coursesExisted = Restangular.all('teachers/' + $scope.teacher.$id.toString() + '/courses').getList().$object;
-    $scope.coursesAll = Restangular.all('majors/' + $scope.teacher.$relationships.major.data.id.toString() + '/courses').getList().$object;
-
+    $scope.coursesAll = {}
+    if ($scope.teacher.$relationships.major != null){
+      var majorid = $scope.teacher.$relationships.major.data.id;
+      $scope.coursesAll = Restangular.all('majors/' + majorid + '/courses').getList().$object;
+    }
     $scope.updateExisted = function() {
       $scope.courseExisted = $scope.selectedcourseExisted.value[0];
     };
