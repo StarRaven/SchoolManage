@@ -14,6 +14,7 @@ angular
     'ui.bootstrap',
     'angular-loading-bar',
     'restangular',
+    'ui.bootstrap.datetimepicker',
   ])
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
 
