@@ -3,7 +3,7 @@ angular.module('sbAdminApp')
 function ($scope, $http, $state, $timeout, Restangular) {
   $scope.login().then(function (){
   $scope.school = $scope.currentUser.$related.school;
-  //$scope.majors = Restangular.all('schools/'+$scope.school.$id.toString()+'/majors').getList().$object;
+  $scope.majors = Restangular.all('schools/'+$scope.school.$id.toString()+'/majors').getList().$object;
   var original;
   return $scope.user = {
       $type: "student",
@@ -37,7 +37,7 @@ function ($scope, $http, $state, $timeout, Restangular) {
       return $scope.form_signin.$valid && !angular.equals($scope.user, original)
   },
   $scope.submitForm = function() {
-    console.log($scope.user);
+    $scope.user.$relationships.major = {data:$scope.major.$asLink()};
     if($scope.user.gendername == '男')
       $scope.user.gender = 1;
     else
