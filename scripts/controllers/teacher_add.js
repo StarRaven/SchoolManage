@@ -35,12 +35,8 @@ function ($scope, $http, $state, $timeout, Restangular) {
       return $scope.form_signin.$valid && !angular.equals($scope.user, original)
   },
   $scope.submitForm = function() {
-    console.log($scope.major);
     $scope.user.$relationships.major = {data:$scope.major.$asLink()};
-    console.log($scope.user);
-
-
-      Restangular.all('teachers').post($scope.user).then(function (question) {
+      Restangular.all('teachers').post($scope.user).then(function (teacher) {
           alert("新增老师成功");
           return $scope.showInfoOnSubmit = !0,
           $scope.revert();

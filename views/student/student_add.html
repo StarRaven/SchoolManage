@@ -62,6 +62,15 @@
                   <td>住址：</td>
                   <td><input class="form-control" data-ng-model="user.address" id="InputAddress" placeholder="请输入学生住址" required type="text"></td>
                 </tr>
+                <tr class="even gradeC">
+                  <td>专业：</td>
+                  <td>
+                    <div class="form-group">
+                      <select class="form-control" data-ng-model="major" ng-options="major.name for major in majors">
+                      </select>
+                    </div>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
