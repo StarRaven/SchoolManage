@@ -88,14 +88,18 @@ function ($scope, $http, $state, $modal, $timeout, Restangular, dateFilter) {
   //className end
 
   $scope.submit = function (course) {
-    console.log(course);
-
     course.patch(course).then(function (c) {
       alert("修改成功");
+      $scope.coursesAll = Restangular.all('courses?size=100000').getList().$object;
     });
 
   };
-
+  $scope.courseremove = function() {
+    $scope.course.remove().then(function (c) {
+      alert("删除成功");
+      $scope.coursesAll = Restangular.all('courses?size=100000').getList().$object;
+    });
+  };
 });
 });
 
