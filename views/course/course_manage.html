@@ -64,64 +64,66 @@
             报名时间:
             <br><br>
             <div class="col-lg-6">
-              <div class="dropdown">
-                <a class="dropdown-toggle" data-target="#" data-toggle="dropdown" href="#" id="dropdown1" role="button">
-                  <div class="input-group"><input class="form-control" data-ng-model="course.enrollStarttime" type="text">
-                    <span class="input-group-addon">
-                      <i class="glyphicon glyphicon-calendar"></i>
-                    </span>
-                  </div>
-                </a>
-                <ul aria-labelledby="dLabel" class="dropdown-menu" role="menu">
-                  <datetimepicker data-datetimepicker-config="{ dropdownSelector: '#dropdown1' }" data-ng-model="course.enrollStarttime"/>
-                </ul>
+              <div class="form-group">
+                <div class="input-group date form_enrollStarttime col-md-5" data-link-field="dtp_input_enrollStarttime">
+                  <input class="form-control" ng-model="course.enrollStarttime" readonly size="16" type="text">
+                  <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-remove"></span>
+                  </span>
+                  <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-th"></span>
+                  </span>
+                </div>
+                <input id="dtp_input_enrollStarttime" type="hidden" value=""/><br/>
               </div>
+
             </div>
             <div class="col-lg-6">
-              <div class="dropdown">
-                <a class="dropdown-toggle" data-target="#" data-toggle="dropdown" href="#" id="dropdown2" role="button">
-                  <div class="input-group"><input class="form-control" data-ng-model="course.enrollEndtime" type="text">
-                    <span class="input-group-addon">
-                      <i class="glyphicon glyphicon-calendar"></i>
-                    </span>
-                  </div>
-                </a>
-                <ul aria-labelledby="dLabel" class="dropdown-menu" role="menu">
-                  <datetimepicker data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }" data-ng-model="course.enrollEndtime"/>
-                </ul>
+              <div class="form-group">
+                <div class="input-group date form_enrollEndtime col-md-5" data-link-field="dtp_input_enrollEndtime">
+                  <input class="form-control" ng-model="course.enrollEndtime" readonly size="16" type="text">
+                  <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-remove"></span>
+                  </span>
+                  <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-th"></span>
+                  </span>
+                </div>
+                <input id="dtp_input_enrollEndtime" type="hidden" value=""/><br/>
               </div>
             </div>
             <br><br><hr>
             开课时间:
             <br><br>
             <div class="col-lg-6">
-              <div class="dropdown">
-                <a class="dropdown-toggle" data-target="#" data-toggle="dropdown" href="#" id="dropdown1" role="button">
-                  <div class="input-group"><input class="form-control" data-ng-model="course.startTime" type="text">
-                    <span class="input-group-addon">
-                      <i class="glyphicon glyphicon-calendar"></i>
-                    </span>
-                  </div>
-                </a>
-                <ul aria-labelledby="dLabel" class="dropdown-menu" role="menu">
-                  <datetimepicker data-datetimepicker-config="{ dropdownSelector: '#dropdown1' }" data-ng-model="course.startTime"/>
-                </ul>
+              <div class="form-group">
+                <div class="input-group date form_startTime col-md-5" data-link-field="dtp_input_startTime">
+                  <input class="form-control" ng-model="course.startTime" readonly size="16" type="text">
+                  <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-remove"></span>
+                  </span>
+                  <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-th"></span>
+                  </span>
+                </div>
+                <input id="dtp_input_startTime" type="hidden" value=""/><br/>
               </div>
             </div>
             <div class="col-lg-6">
-              <div class="dropdown">
-                <a class="dropdown-toggle" data-target="#" data-toggle="dropdown" href="#" id="dropdown2" role="button">
-                  <div class="input-group"><input class="form-control" data-ng-model="course.endTime" type="text">
-                    <span class="input-group-addon">
-                      <i class="glyphicon glyphicon-calendar"></i>
-                    </span>
-                  </div>
-                </a>
-                <ul aria-labelledby="dLabel" class="dropdown-menu" role="menu">
-                  <datetimepicker data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }" data-ng-model="course.endTime"/>
-                </ul>
+              <div class="form-group">
+                <div class="input-group date form_endTime col-md-5" data-link-field="dtp_input_endTime">
+                  <input class="form-control" ng-model="course.endTime" readonly size="16" type="text">
+                  <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-remove"></span>
+                  </span>
+                  <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-th"></span>
+                  </span>
+                </div>
+                <input id="dtp_input_endTime" type="hidden" value=""/><br/>
               </div>
             </div>
+
             <br><br><hr>
             <div class="form-group">
               成绩比例:
@@ -170,3 +172,45 @@
 
 </div>
 </div>
+<script type="text/javascript">
+  $('.form_enrollStarttime').datetimepicker({
+  //language:  'fr',
+    weekStart: 1,
+    todayBtn: 1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 2,
+    forceParse: 0,
+    showMeridian: 1
+  });
+  $('.form_enrollEndtime').datetimepicker({
+  //language:  'fr',
+    weekStart: 1,
+    todayBtn: 1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 2,
+    forceParse: 0,
+    showMeridian: 1
+  });
+  $('.form_startTime').datetimepicker({
+  //language:  'fr',
+    weekStart: 1,
+    todayBtn: 1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 2,
+    forceParse: 0,
+    showMeridian: 1
+  });
+  $('.form_endTime').datetimepicker({
+  //language:  'fr',
+    weekStart: 1,
+    todayBtn: 1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 2,
+    forceParse: 0,
+    showMeridian: 1
+  });
+</script>

@@ -1,6 +1,6 @@
 angular.module('sbAdminApp')
 .controller('courseManageCtrl',
-function ($scope, $http, $state, $modal, $timeout, Restangular, dateFilter) {
+function ($scope, $http, $state, $modal, $timeout, Restangular, $filter,dateFilter) {
   $scope.login().then(function() {
     $scope.coursesAll = Restangular.all('courses?size=100000').getList().$object;
     $scope.updateAll = function() {
@@ -52,23 +52,53 @@ function ($scope, $http, $state, $modal, $timeout, Restangular, dateFilter) {
     1:'已选择'
   }
 
+//datepicker begin
+  function formatDate(date, format) {
+      if (!date) return;
+      if (!format) format = "yyyy-MM-dd";
+      switch(typeof date) {
+          case "string":
+              date = new Date(date.replace(/-/, "/"));
+              break;
+          case "number":
+              date = new Date(date);
+              break;
+      }
+      if (!date instanceof Date) return;
+      var dict = {
+          "yyyy": date.getFullYear(),
+          "M": date.getMonth() + 1,
+          "d": date.getDate(),
+          "H": date.getHours(),
+          "m": date.getMinutes(),
+          "s": date.getSeconds(),
+          "MM": ("" + (date.getMonth() + 101)).substr(1),
+          "dd": ("" + (date.getDate() + 100)).substr(1),
+          "HH": ("" + (date.getHours() + 100)).substr(1),
+          "mm": ("" + (date.getMinutes() + 100)).substr(1),
+          "ss": ("" + (date.getSeconds() + 100)).substr(1)
+      };
+      return format.replace(/(yyyy|MM?|dd?|HH?|ss?|mm?)/g, function() {
+          return dict[arguments[0]];
+      });
+  }
 
-  //datepicker begin
   $scope.$watch('course.enrollStarttime', function (date)
   {
-    $scope.course.enrollStarttime = dateFilter($scope.course.enrollStarttime, 'yyyy-MM-dd hh:mm:ss');
+    $scope.course.enrollStarttime = formatDate($scope.course.enrollStarttime,"yyyy-MM-dd HH:mm:ss");
   });
+
   $scope.$watch('course.enrollEndtime', function (date)
   {
-    $scope.course.enrollEndtime = dateFilter($scope.course.enrollEndtime, 'yyyy-MM-dd hh:mm:ss');
+    $scope.course.enrollEndtime = formatDate($scope.course.enrollEndtime,"yyyy-MM-dd HH:mm:ss");
   });
   $scope.$watch('course.startTime', function (date)
   {
-    $scope.course.startTime = dateFilter($scope.course.startTime, 'yyyy-MM-dd hh:mm:ss');
+    $scope.course.startTime = formatDate($scope.course.startTime,"yyyy-MM-dd HH:mm:ss");
   });
   $scope.$watch('course.endTime', function (date)
   {
-    $scope.course.endTime = dateFilter($scope.course.endTime, 'yyyy-MM-dd hh:mm:ss');
+    $scope.course.endTime = formatDate($scope.course.endTime,"yyyy-MM-dd HH:mm:ss");
   });
   //datepicker end
 
@@ -100,8 +130,13 @@ function ($scope, $http, $state, $modal, $timeout, Restangular, dateFilter) {
       $scope.coursesAll = Restangular.all('courses?size=100000').getList().$object;
     });
   };
+
 });
 });
+
+
+
+
 
 function isEmpty(value) {
     return angular.isUndefined(value) || value === '' || value === null || value !== value;

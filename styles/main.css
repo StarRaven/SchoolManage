@@ -90,3 +90,7 @@ td {
 select[multiple], select[size] {
     height: 704px;
 }
+
+.input-group {
+  width: 100%;
+}
