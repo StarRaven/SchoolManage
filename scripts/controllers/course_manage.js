@@ -97,10 +97,29 @@ function ($scope, $http, $state, $modal, $timeout, Restangular, dateFilter) {
 
   };
   $scope.courseremove = function() {
-    $scope.course.remove().then(function (c) {
+    if($scope.course.$id != null){
+      var reqDEL = {
+      method: 'DELETE',
+      url: '/api/schools/' + schoolid + '/links/courses',
+      headers: {
+       'Access-Token': $scope.currentUser.$token,
+      },
+      data: {
+          "data":[
+            {
+              type:"course",
+              id: $scope.course.$id
+            }
+          ]
+        }
+      };
+      console.log(reqDEL);
+      $http(reqDEL)
+        .then(function () {
       alert("删除成功");
       $scope.coursesAll = Restangular.all('schools/'+schoolid+'/courses').getList().$object;
-    });
+      });
+    }
   };
 });
 });
