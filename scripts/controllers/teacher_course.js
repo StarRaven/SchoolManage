@@ -18,26 +18,27 @@ function ($scope, $http, $state, $timeout, $modalInstance, Restangular, school, 
     };
 
     $scope.delCourse = function() {
-      console.log($scope.courseExisted);
-      var reqDEL = {
-        method: 'DELETE',
-        url: '/api/teachers/' + $scope.teacher.$id.toString() + '/links/courses',
-        headers: {
-          'Access-Token': currentUser.$token,
-        },
-        data: {
-          "data": [{
-            type: "course",
-            id: $scope.courseExisted.$id
-          }]
+      if($scope.courseExisted){
+        var reqDEL = {
+          method: 'DELETE',
+          url: '/api/teachers/' + $scope.teacher.$id.toString() + '/links/courses',
+          headers: {
+            'Access-Token': currentUser.$token,
+          },
+          data: {
+            "data": [{
+              type: "course",
+              id: $scope.courseExisted.$id
+            }]
+          }
+        };
+        console.log(reqDEL);
+        $http(reqDEL)
+          .then(function() {
+            alert("删除指定课程成功");
+            $scope.coursesExisted = Restangular.all('teachers/' + $scope.teacher.$id.toString() + '/courses').getList().$object;
+          });
         }
-      };
-      console.log(reqDEL);
-      $http(reqDEL)
-        .then(function() {
-          alert("删除指定课程成功");
-          $scope.coursesExisted = Restangular.all('teachers/' + $scope.teacher.$id.toString() + '/courses').getList().$object;
-        });
     };
 
     $scope.updateAll = function() {
@@ -45,24 +46,26 @@ function ($scope, $http, $state, $timeout, $modalInstance, Restangular, school, 
     };
 
     $scope.addCourse = function() {
-      var reqAdd = {
-        method: 'POST',
-        url: '/api/teachers/' + $scope.teacher.$id.toString() + '/links/courses',
-        headers: {
-          'Access-Token': currentUser.$token,
-        },
-        data: {
-          "data": [{
-            type: "course",
-            id: $scope.courseAll.$id
-          }]
-        }
-      };
-      console.log(reqAdd);
-      $http(reqAdd)
-        .then(function() {
-          alert("添加指定课程成功");
-          $scope.coursesExisted = Restangular.all('teachers/' + $scope.teacher.$id.toString() + '/courses').getList().$object;
-        });
+      if($scope.courseAll){
+        var reqAdd = {
+          method: 'POST',
+          url: '/api/teachers/' + $scope.teacher.$id.toString() + '/links/courses',
+          headers: {
+            'Access-Token': currentUser.$token,
+          },
+          data: {
+            "data": [{
+              type: "course",
+              id: $scope.courseAll.$id
+            }]
+          }
+        };
+        console.log(reqAdd);
+        $http(reqAdd)
+          .then(function() {
+            alert("添加指定课程成功");
+            $scope.coursesExisted = Restangular.all('teachers/' + $scope.teacher.$id.toString() + '/courses').getList().$object;
+          });
+      }
     };
 });

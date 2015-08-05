@@ -21,25 +21,27 @@ function($scope, $http, $state, $timeout, Restangular) {
     };
 
     $scope.buyCourse = function() {
-      var reqAdd = {
-        method: 'POST',
-        url: '/api/schools/' + $scope.school.$id.toString() + '/links/courses',
-        headers: {
-          'Access-Token': $scope.currentUser.$token,
-        },
-        data: {
-          "data": [{
-            type: "course",
-            id: $scope.courseAll.$id
-          }]
+      if($scope.courseAll){
+        var reqAdd = {
+          method: 'POST',
+          url: '/api/schools/' + $scope.school.$id.toString() + '/links/courses',
+          headers: {
+            'Access-Token': $scope.currentUser.$token,
+          },
+          data: {
+            "data": [{
+              type: "course",
+              id: $scope.courseAll.$id
+            }]
+          }
+        };
+        console.log(reqAdd);
+        $http(reqAdd)
+          .then(function() {
+            alert("添加指定课程成功");
+            $scope.coursesExisted = Restangular.all('schools/' + $scope.school.$id.toString() + '/courses').getList().$object;
+          });
         }
-      };
-      console.log(reqAdd);
-      $http(reqAdd)
-        .then(function() {
-          alert("添加指定课程成功");
-          $scope.coursesExisted = Restangular.all('schools/' + $scope.school.$id.toString() + '/courses').getList().$object;
-        });
     };
   });
 });

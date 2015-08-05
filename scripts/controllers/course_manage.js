@@ -39,12 +39,16 @@ function ($scope, $http, $state, $modal, $timeout, Restangular, $filter,dateFilt
   //})
 
   $scope.$watch('course.assignmentRatio' ,function(ratios){
-    $scope.course.testRatio=100-$scope.course.examRatio-$scope.course.assignmentRatio;
-    $scope.ratiosValid = !isNaN($scope.course.testRatio);
+    if($scope.course){
+      $scope.course.testRatio=100-$scope.course.examRatio-$scope.course.assignmentRatio;
+      $scope.ratiosValid = !isNaN($scope.course.testRatio);
+    }
   })
   $scope.$watch('course.examRatio' ,function(ratios){
-    $scope.course.testRatio=100-$scope.course.examRatio-$scope.course.assignmentRatio;
-    $scope.ratiosValid = !isNaN($scope.course.testRatio);
+    if($scope.course){
+      $scope.course.testRatio=100-$scope.course.examRatio-$scope.course.assignmentRatio;
+      $scope.ratiosValid = !isNaN($scope.course.testRatio);
+    }
   })
   //form-group inputs end
 
@@ -87,47 +91,43 @@ function ($scope, $http, $state, $modal, $timeout, Restangular, $filter,dateFilt
 
   $scope.$watch('course.enrollStarttime', function (date)
   {
-    $scope.course.enrollStarttime = formatDate($scope.course.enrollStarttime,"yyyy-MM-dd HH:mm:ss");
+    if($scope.course){
+      $scope.course.enrollStarttime = formatDate($scope.course.enrollStarttime,"yyyy-MM-dd HH:mm:ss");
+    }
   });
 
   $scope.$watch('course.enrollEndtime', function (date)
   {
-    $scope.course.enrollEndtime = formatDate($scope.course.enrollEndtime,"yyyy-MM-dd HH:mm:ss");
+    if($scope.course){
+      $scope.course.enrollEndtime = formatDate($scope.course.enrollEndtime,"yyyy-MM-dd HH:mm:ss");
+    }
   });
   $scope.$watch('course.startTime', function (date)
   {
-    $scope.course.startTime = formatDate($scope.course.startTime,"yyyy-MM-dd HH:mm:ss");
+    if($scope.course){
+      $scope.course.startTime = formatDate($scope.course.startTime,"yyyy-MM-dd HH:mm:ss");
+    }
   });
   $scope.$watch('course.endTime', function (date)
   {
-    $scope.course.endTime = formatDate($scope.course.endTime,"yyyy-MM-dd HH:mm:ss");
+    if($scope.course){
+      $scope.course.endTime = formatDate($scope.course.endTime,"yyyy-MM-dd HH:mm:ss");
+    }
   });
   //datepicker end
 
-  //className begin
-  $scope.$watch('classNum',function(newClassNum,oldClassNum){
-    $scope.course.classNames=$scope.course.classNames||['班级1'];
-    if(newClassNum<oldClassNum){
-      for(var i=oldClassNum;i>newClassNum;i--){
-        $scope.course.classNames.pop();
-      }
-    }else{
-      for(var i=oldClassNum;i<newClassNum;i++){
-        $scope.course.classNames.push('班级'+(i+1));
-      }
-    }
-  })
-  //className end
 
   $scope.submit = function (course) {
-    course.patch(course).then(function (c) {
-      alert("修改成功");
-      $scope.coursesAll = Restangular.all('schools/'+schoolid+'/courses').getList().$object;
-    });
+    if(course.$id != null){
+      course.patch(course).then(function (c) {
+        alert("修改成功");
+        $scope.coursesAll = Restangular.all('schools/'+schoolid+'/courses').getList().$object;
+      });
+    }
 
   };
   $scope.courseremove = function() {
-    if($scope.course.$id != null){
+    if($scope.course){
       var reqDEL = {
       method: 'DELETE',
       url: '/api/schools/' + schoolid + '/links/courses',
