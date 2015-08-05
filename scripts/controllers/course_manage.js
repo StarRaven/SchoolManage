@@ -2,7 +2,9 @@ angular.module('sbAdminApp')
 .controller('courseManageCtrl',
 function ($scope, $http, $state, $modal, $timeout, Restangular, dateFilter) {
   $scope.login().then(function() {
-    $scope.coursesAll = Restangular.all('courses?size=100000').getList().$object;
+    $scope.school = $scope.currentUser.$related.school;
+    var schoolid = $scope.school.$id;
+    $scope.coursesAll = Restangular.all('schools/'+schoolid+'/courses').getList().$object;
     $scope.updateAll = function() {
     //  $scope.course = $scope.selectedcourseAll.value[0];
     $scope.course = Restangular.one('courses', $scope.selectedcourseAll.value[0].$id).get().$object;
@@ -90,14 +92,14 @@ function ($scope, $http, $state, $modal, $timeout, Restangular, dateFilter) {
   $scope.submit = function (course) {
     course.patch(course).then(function (c) {
       alert("修改成功");
-      $scope.coursesAll = Restangular.all('courses?size=100000').getList().$object;
+      $scope.coursesAll = Restangular.all('schools/'+schoolid+'/courses').getList().$object;
     });
 
   };
   $scope.courseremove = function() {
     $scope.course.remove().then(function (c) {
       alert("删除成功");
-      $scope.coursesAll = Restangular.all('courses?size=100000').getList().$object;
+      $scope.coursesAll = Restangular.all('schools/'+schoolid+'/courses').getList().$object;
     });
   };
 });
