@@ -128,6 +128,16 @@ angular
       url:'/course/manageCourse',
       controller:'courseManageCtrl',
     })
+    .state('dashboard.addMajor',{
+        templateUrl:'views/major/major_add.html',
+        url:'/course/addMajor',
+        controller:'majorAddCtrl',
+    })
+    .state('dashboard.manageMajor',{
+      templateUrl:'views/major/major_manage.html',
+      url:'/course/manageMajor',
+      controller:'majorManageCtrl',
+    })
       .state('login',{
         templateUrl:'views/pages/login.html',
         url:'/login'
