@@ -40,6 +40,20 @@ function ($scope, $http, $state, $modal, $timeout, Restangular, $rootScope) {
         });
       }
     };
+
+    $scope.submitPassword = function (newpassword) {
+      if($scope.user.$id){
+        $scope.newstudent = {
+          $type: "student",
+          password: newpassword.content
+        };
+        console.log($scope.newstudent);
+        Restangular.one('students', $scope.user.$id).patch($scope.newstudent).then(function() {
+          alert("修改成功");
+          $state.reload();
+        });
+      }
+    }
     $scope.assign = function() {
       if($scope.user.$id != null){
         $modal.open({
