@@ -3,7 +3,6 @@ angular.module('sbAdminApp')
 function($scope, $http, $state, $timeout, Restangular) {
   $scope.login().then(function() {
     $scope.school = $scope.currentUser.$related.school;
-    $scope.coursesAll = Restangular.all('courses?size=100000').getList().$object;
     $scope.coursesExisted = Restangular.all('schools/' + $scope.school.$id.toString() + '/courses').getList().$object;
     $scope.courseEnum = {
       1: '公共基础课',
@@ -11,6 +10,21 @@ function($scope, $http, $state, $timeout, Restangular) {
       3: '实训课',
       8: '模板课',
     }
+
+    Restangular.all('/majors').getList().then(function(majors) {
+      $scope.majors = majors;
+      $scope.major = $scope.majors[0];
+      console.log($scope.major);
+      $scope.coursesAll = Restangular.all('majors/' + $scope.major.$id + '/courses').getList().$object;
+    });
+
+    $scope.updateMajor = function() {
+      if ($scope.major) {
+        $scope.coursesAll = Restangular.all('majors/' + $scope.major.$id + '/courses').getList().$object;
+      } else {
+        $scope.coursesAll = Restangular.all('courses?size=100000').getList().$object;
+      }
+    };
 
     $scope.updateExisted = function() {
       $scope.courseExisted = $scope.selectedcourseExisted.value[0];

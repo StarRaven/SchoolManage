@@ -12,8 +12,22 @@
       </div>
       <div class="col-lg-12">
         <br>
-        搜索课程：&nbsp
-        <input ng-model="querycourseAll">
+        <table class="table table-bordered">
+          <tr class="even gradeC">
+            <td>
+              搜索课程：&nbsp
+              <input ng-model="querycourseAll">
+            </td>
+            <td>
+              <div style="padding-top:6px;float:left">
+                选择专业：&nbsp
+              </div>
+              <select class="form-control" ng-change="updateMajor()" ng-model="major" ng-options="major.name for major in majors" style="width:60%;float:right">
+                <option value="">显示所有</option>
+              </select>
+            </td>
+          </tr>
+        </table>
         <hr>
       </div>
       <div class="col-lg-5">

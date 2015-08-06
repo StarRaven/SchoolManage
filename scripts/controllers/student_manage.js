@@ -4,9 +4,20 @@ function ($scope, $http, $state, $modal, $timeout, Restangular) {
   $scope.login().then(function (){
     $scope.user = {};
     $scope.school = $scope.currentUser.$related.school;
-    $scope.students=Restangular.all('schools/'+$scope.school.$id.toString()+'/students').getList().$object;
 
-    console.log($scope.students);
+    Restangular.all('schools/' + $scope.school.$id.toString() + '/majors').getList().then(function(majors) {
+      $scope.majors = majors;
+      $scope.major = $scope.majors[0];
+      $scope.students = Restangular.all('majors/' + $scope.major.$id + '/students').getList().$object;
+    });
+
+    $scope.updateMajor = function() {
+      if ($scope.major) {
+        $scope.students = Restangular.all('majors/' + $scope.major.$id + '/students').getList().$object;
+      } else {
+        $scope.students=Restangular.all('schools/'+$scope.school.$id.toString()+'/students').getList().$object;
+      }
+    };
 
     $scope.update = function() {
       $scope.user = $scope.selected.value[0];

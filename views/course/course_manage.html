@@ -11,8 +11,22 @@
         课程列表
       </div>
       <div class="panel-body">
-        搜索课程：&nbsp
-        <input ng-model="querycourseAll">
+        <table class="table table-bordered">
+          <tr class="even gradeC">
+            <td>
+              搜索课程：&nbsp
+              <input ng-model="querycourseAll">
+            </td>
+            <td >
+              <div style="padding-top:6px;float:left">
+                选择专业：&nbsp
+              </div>
+              <select class="form-control" ng-change="updateMajor()" ng-model="major" ng-options="major.name for major in majors" style="width:60%;float:right">
+                <option value="">显示所有</option>
+              </select>
+            </td>
+          </tr>
+        </table>
         <hr>
         <div class="form-group">
           <select class="form-control" multiple ng-change="updateAll()" ng-model="selectedcourseAll.value" ng-options="courseAll.name for courseAll in coursesAll | filter:{ name : querycourseAll }" style="height: 450px"></select>
@@ -173,44 +187,44 @@
 </div>
 </div>
 <script type="text/javascript">
-  $('.form_enrollStarttime').datetimepicker({
-  //language:  'fr',
-    weekStart: 1,
-    todayBtn: 1,
-    autoclose: 1,
-    todayHighlight: 1,
-    startView: 2,
-    forceParse: 0,
-    showMeridian: 1
-  });
-  $('.form_enrollEndtime').datetimepicker({
-  //language:  'fr',
-    weekStart: 1,
-    todayBtn: 1,
-    autoclose: 1,
-    todayHighlight: 1,
-    startView: 2,
-    forceParse: 0,
-    showMeridian: 1
-  });
-  $('.form_startTime').datetimepicker({
-  //language:  'fr',
-    weekStart: 1,
-    todayBtn: 1,
-    autoclose: 1,
-    todayHighlight: 1,
-    startView: 2,
-    forceParse: 0,
-    showMeridian: 1
-  });
-  $('.form_endTime').datetimepicker({
-  //language:  'fr',
-    weekStart: 1,
-    todayBtn: 1,
-    autoclose: 1,
-    todayHighlight: 1,
-    startView: 2,
-    forceParse: 0,
-    showMeridian: 1
-  });
+$('.form_enrollStarttime').datetimepicker({
+//language:  'fr',
+  weekStart: 1,
+  todayBtn: 1,
+  autoclose: 1,
+  todayHighlight: 1,
+  startView: 2,
+  forceParse: 0,
+  showMeridian: 1
+});
+$('.form_enrollEndtime').datetimepicker({
+//language:  'fr',
+  weekStart: 1,
+  todayBtn: 1,
+  autoclose: 1,
+  todayHighlight: 1,
+  startView: 2,
+  forceParse: 0,
+  showMeridian: 1
+});
+$('.form_startTime').datetimepicker({
+//language:  'fr',
+  weekStart: 1,
+  todayBtn: 1,
+  autoclose: 1,
+  todayHighlight: 1,
+  startView: 2,
+  forceParse: 0,
+  showMeridian: 1
+});
+$('.form_endTime').datetimepicker({
+//language:  'fr',
+  weekStart: 1,
+  todayBtn: 1,
+  autoclose: 1,
+  todayHighlight: 1,
+  startView: 2,
+  forceParse: 0,
+  showMeridian: 1
+});
 </script>

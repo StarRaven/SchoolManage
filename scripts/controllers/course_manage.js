@@ -3,161 +3,158 @@ angular.module('sbAdminApp')
 function ($scope, $http, $state, $modal, $timeout, Restangular, $filter,dateFilter) {
   $scope.login().then(function() {
     $scope.school = $scope.currentUser.$related.school;
-    var schoolid = $scope.school.$id;
-    $scope.coursesAll = Restangular.all('schools/'+schoolid+'/courses').getList().$object;
+
+    Restangular.all('schools/' + $scope.school.$id.toString() + '/majors').getList().then(function(majors) {
+      $scope.majors = majors;
+      $scope.major = $scope.majors[0];
+      console.log($scope.major);
+      $scope.coursesAll = Restangular.all('majors/' + $scope.major.$id + '/courses').getList().$object;
+    });
+
+    $scope.updateMajor = function() {
+      if ($scope.major) {
+        $scope.coursesAll = Restangular.all('majors/' + $scope.major.$id + '/courses').getList().$object;
+      } else {
+        $scope.coursesAll = Restangular.all('schools/' + $scope.school.$id + '/courses').getList().$object;
+      }
+    };
+
     $scope.updateAll = function() {
-    //  $scope.course = $scope.selectedcourseAll.value[0];
-    $scope.course = Restangular.one('courses', $scope.selectedcourseAll.value[0].$id).get().$object;
+      $scope.course = Restangular.one('courses', $scope.selectedcourseAll.value[0].$id).get().$object;
       console.log($scope.course);
     };
-  //$scope.course=Restangular.one('courses', '1').get().$object;
 
-  //form-group inputs begin
-  $scope.isPosInt=function(num)
-  {
-     var re = /^[1-9]+[0-9]*]*$/;
-     return re.test(num);
-  };
+    //form-group inputs begin
+    $scope.isPosInt = function(num) {
+      var re = /^[1-9]+[0-9]*]*$/;
+      return re.test(num);
+    };
 
-  $scope.ratios={
-    'assignmentRatio':{
-      title:'作业比例',
-      type:'success',
-    },
-    'testRatio':{
-      title:'测验比例',
-      type:'info'
-    },
-    'examRatio':{
-      title:'考试比例',
-      type:'danger'
-    },
-  };
-  //$scope.$watchGroup(['course.assignmentRatio','course.examRatio'],function(ratios){
-  //  $scope.course.testRatio=100-$scope.course.examRatio-$scope.course.assignmentRatio;
-  //  $scope.ratiosValid = !isNaN($scope.course.testRatio);
-  //})
+    $scope.ratios = {
+      'assignmentRatio': {
+        title: '作业比例',
+        type: 'success',
+      },
+      'testRatio': {
+        title: '测验比例',
+        type: 'info'
+      },
+      'examRatio': {
+        title: '考试比例',
+        type: 'danger'
+      },
+    };
 
-  $scope.$watch('course.assignmentRatio' ,function(ratios){
-    if($scope.course){
-      $scope.course.testRatio=100-$scope.course.examRatio-$scope.course.assignmentRatio;
-      $scope.ratiosValid = !isNaN($scope.course.testRatio);
+    $scope.$watch('course.assignmentRatio', function(ratios) {
+      if ($scope.course) {
+        $scope.course.testRatio = 100 - $scope.course.examRatio - $scope.course.assignmentRatio;
+        $scope.ratiosValid = !isNaN($scope.course.testRatio);
+      }
+    })
+    $scope.$watch('course.examRatio', function(ratios) {
+        if ($scope.course) {
+          $scope.course.testRatio = 100 - $scope.course.examRatio - $scope.course.assignmentRatio;
+          $scope.ratiosValid = !isNaN($scope.course.testRatio);
+        }
+      })
+      //form-group inputs end
+
+    //teaching matatiral begin
+    $scope.chooseEnum = {
+      0: '未选择',
+      1: '已选择'
     }
-  })
-  $scope.$watch('course.examRatio' ,function(ratios){
-    if($scope.course){
-      $scope.course.testRatio=100-$scope.course.examRatio-$scope.course.assignmentRatio;
-      $scope.ratiosValid = !isNaN($scope.course.testRatio);
-    }
-  })
-  //form-group inputs end
 
-  //teaching matatiral begin
-  $scope.chooseEnum={
-    0:'未选择',
-    1:'已选择'
-  }
-
-//datepicker begin
-  function formatDate(date, format) {
+    //datepicker begin
+    function formatDate(date, format) {
       if (!date) return;
       if (!format) format = "yyyy-MM-dd";
-      switch(typeof date) {
-          case "string":
-              date = new Date(date.replace(/-/, "/"));
-              break;
-          case "number":
-              date = new Date(date);
-              break;
+      switch (typeof date) {
+        case "string":
+          date = new Date(date.replace(/-/, "/"));
+          break;
+        case "number":
+          date = new Date(date);
+          break;
       }
       if (!date instanceof Date) return;
       var dict = {
-          "yyyy": date.getFullYear(),
-          "M": date.getMonth() + 1,
-          "d": date.getDate(),
-          "H": date.getHours(),
-          "m": date.getMinutes(),
-          "s": date.getSeconds(),
-          "MM": ("" + (date.getMonth() + 101)).substr(1),
-          "dd": ("" + (date.getDate() + 100)).substr(1),
-          "HH": ("" + (date.getHours() + 100)).substr(1),
-          "mm": ("" + (date.getMinutes() + 100)).substr(1),
-          "ss": ("" + (date.getSeconds() + 100)).substr(1)
+        "yyyy": date.getFullYear(),
+        "M": date.getMonth() + 1,
+        "d": date.getDate(),
+        "H": date.getHours(),
+        "m": date.getMinutes(),
+        "s": date.getSeconds(),
+        "MM": ("" + (date.getMonth() + 101)).substr(1),
+        "dd": ("" + (date.getDate() + 100)).substr(1),
+        "HH": ("" + (date.getHours() + 100)).substr(1),
+        "mm": ("" + (date.getMinutes() + 100)).substr(1),
+        "ss": ("" + (date.getSeconds() + 100)).substr(1)
       };
       return format.replace(/(yyyy|MM?|dd?|HH?|ss?|mm?)/g, function() {
-          return dict[arguments[0]];
-      });
-  }
-
-  $scope.$watch('course.enrollStarttime', function (date)
-  {
-    if($scope.course){
-      $scope.course.enrollStarttime = formatDate($scope.course.enrollStarttime,"yyyy-MM-dd HH:mm:ss");
-    }
-  });
-
-  $scope.$watch('course.enrollEndtime', function (date)
-  {
-    if($scope.course){
-      $scope.course.enrollEndtime = formatDate($scope.course.enrollEndtime,"yyyy-MM-dd HH:mm:ss");
-    }
-  });
-  $scope.$watch('course.startTime', function (date)
-  {
-    if($scope.course){
-      $scope.course.startTime = formatDate($scope.course.startTime,"yyyy-MM-dd HH:mm:ss");
-    }
-  });
-  $scope.$watch('course.endTime', function (date)
-  {
-    if($scope.course){
-      $scope.course.endTime = formatDate($scope.course.endTime,"yyyy-MM-dd HH:mm:ss");
-    }
-  });
-  //datepicker end
-
-
-  $scope.submit = function (course) {
-    if(course.$id != null){
-      course.patch(course).then(function (c) {
-        alert("修改成功");
-        $scope.coursesAll = Restangular.all('schools/'+schoolid+'/courses').getList().$object;
+        return dict[arguments[0]];
       });
     }
 
-  };
-  $scope.courseremove = function() {
-    if($scope.course){
-      var reqDEL = {
-      method: 'DELETE',
-      url: '/api/schools/' + schoolid + '/links/courses',
-      headers: {
-       'Access-Token': $scope.currentUser.$token,
-      },
-      data: {
-          "data":[
-            {
-              type:"course",
+    $scope.$watch('course.enrollStarttime', function(date) {
+      if ($scope.course) {
+        $scope.course.enrollStarttime = formatDate($scope.course.enrollStarttime, "yyyy-MM-dd HH:mm:ss");
+      }
+    });
+
+    $scope.$watch('course.enrollEndtime', function(date) {
+      if ($scope.course) {
+        $scope.course.enrollEndtime = formatDate($scope.course.enrollEndtime, "yyyy-MM-dd HH:mm:ss");
+      }
+    });
+    $scope.$watch('course.startTime', function(date) {
+      if ($scope.course) {
+        $scope.course.startTime = formatDate($scope.course.startTime, "yyyy-MM-dd HH:mm:ss");
+      }
+    });
+    $scope.$watch('course.endTime', function(date) {
+      if ($scope.course) {
+        $scope.course.endTime = formatDate($scope.course.endTime, "yyyy-MM-dd HH:mm:ss");
+      }
+    });
+    //datepicker end
+
+
+    $scope.submit = function(course) {
+      if (course.$id != null) {
+        course.patch(course).then(function(c) {
+          alert("修改成功");
+          $scope.coursesAll = Restangular.all('schools/' + schoolid + '/courses').getList().$object;
+        });
+      }
+
+    };
+    $scope.courseremove = function() {
+      if ($scope.course) {
+        var reqDEL = {
+          method: 'DELETE',
+          url: '/api/schools/' + schoolid + '/links/courses',
+          headers: {
+            'Access-Token': $scope.currentUser.$token,
+          },
+          data: {
+            "data": [{
+              type: "course",
               id: $scope.course.$id
-            }
-          ]
-        }
-      };
-      console.log(reqDEL);
-      $http(reqDEL)
-        .then(function () {
-      alert("删除成功");
-      $scope.coursesAll = Restangular.all('schools/'+schoolid+'/courses').getList().$object;
-      });
-    }
-  };
+            }]
+          }
+        };
+        console.log(reqDEL);
+        $http(reqDEL)
+          .then(function() {
+            alert("删除成功");
+            $scope.coursesAll = Restangular.all('schools/' + schoolid + '/courses').getList().$object;
+          });
+      }
+    };
 
+  });
 });
-});
-
-
-
-
 
 function isEmpty(value) {
     return angular.isUndefined(value) || value === '' || value === null || value !== value;

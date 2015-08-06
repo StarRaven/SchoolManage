@@ -11,8 +11,22 @@
         教师列表
       </div>
       <div class="panel-body">
-        搜索姓名：&nbsp
-        <input ng-model="query">
+        <table class="table table-bordered">
+          <tr class="even gradeC">
+            <td>
+              搜索姓名：&nbsp
+              <input ng-model="query">
+            </td>
+            <td >
+              <div style="padding-top:6px;float:left">
+                选择专业：&nbsp
+              </div>
+              <select class="form-control" ng-change="updateMajor()" ng-model="major" ng-options="major.name for major in majors" style="width:60%;float:right">
+                <option value="">显示所有</option>
+              </select>
+            </td>
+          </tr>
+        </table>
         <hr>
         <div class="form-group">
           <select class="form-control" multiple ng-change="update()" ng-model="selected.value" ng-options="teacher.username for teacher in teachers | filter:{ username : query }"></select>
@@ -86,7 +100,9 @@
               </tbody>
             </table>
           </div>
-          <center><button class="btn btn-primary btn-w-md" type="submit">修改教师信息</button></center>
+          <center>
+            <button class="btn btn-primary btn-w-md" type="submit">修改教师信息</button>
+          </center>
         </form>
         <hr>
         <form data-ng-submit="submitPassword(password)">
@@ -95,7 +111,11 @@
               <tbody>
                 <tr class="even gradeC">
                   <td><input class="form-control" data-ng-model="password" id="InputPassword" placeholder="输入教师登陆密码" required type="password"></td>
-                <td><center><button class="btn btn-primary btn-w-md" type="submit">修改密码</button></center></td>
+                  <td>
+                    <center>
+                      <button class="btn btn-primary btn-w-md" type="submit">修改密码</button>
+                    </center>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -103,24 +123,29 @@
 
         </form>
         <hr>
-          <div class="dataTable_wrapper">
-            <table class="table table-bordered table-hover">
-              <tbody>
+        <div class="dataTable_wrapper">
+          <table class="table table-bordered table-hover">
+            <tbody>
 
-                <tr class="even gradeC">
-                  <td><center><button class="btn btn-primary btn-w-md" type="button" ng-click="assign()">分配课程</button></center></td>
-                  <td><center><button class="btn btn-primary btn-w-md" type="button" ng-click="teacherremove()">删除教师</button></center></td>
-                </tr>
+              <tr class="even gradeC">
+                <td>
+                  <center>
+                    <button class="btn btn-primary btn-w-md" ng-click="assign()" type="button">分配课程</button>
+                  </center>
+                </td>
+                <td>
+                  <center>
+                    <button class="btn btn-primary btn-w-md" ng-click="teacherremove()" type="button">删除教师</button>
+                  </center>
+                </td>
+              </tr>
 
-              </tbody>
-            </table>
-          </div>
-
-
-
-
+            </tbody>
+          </table>
         </div>
+
       </div>
     </div>
   </div>
+</div>
 </div>
