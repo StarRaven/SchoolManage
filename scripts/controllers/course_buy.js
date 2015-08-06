@@ -1,6 +1,7 @@
 angular.module('sbAdminApp')
 .controller('courseBuyCtrl',
-function($scope, $http, $state, $timeout, Restangular) {
+function($scope, $http, $state, $timeout, Restangular, $rootScope) {
+  $rootScope.pageTitle = "课程管理 - 购买课程";
   $scope.login().then(function() {
     $scope.school = $scope.currentUser.$related.school;
     $scope.coursesExisted = Restangular.all('schools/' + $scope.school.$id.toString() + '/courses').getList().$object;

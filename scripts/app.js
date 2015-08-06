@@ -28,6 +28,7 @@ angular
       .state('dashboard', {
         url:'/dashboard',
         templateUrl: 'views/dashboard/main.html',
+        data : { pageTitle: 'Home' },
         resolve: {
             loadMyDirectives:function($ocLazyLoad){
                 return $ocLazyLoad.load(
@@ -139,7 +140,6 @@ angular
         templateUrl:'views/pages/login.html',
         url:'/login'
     })
-    
   }]).run(function (Restangular, JsonApiOrg, coverAuth, $http) {
     Restangular.setRestangularFields({
         id: "$id"

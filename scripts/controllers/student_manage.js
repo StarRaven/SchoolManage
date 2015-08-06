@@ -1,6 +1,7 @@
 angular.module('sbAdminApp')
 .controller('studentManageCtrl',
-function ($scope, $http, $state, $modal, $timeout, Restangular) {
+function ($scope, $http, $state, $modal, $timeout, Restangular, $rootScope) {
+  $rootScope.pageTitle = "学生管理 - 详细管理";
   $scope.login().then(function (){
     $scope.user = {};
     $scope.school = $scope.currentUser.$related.school;

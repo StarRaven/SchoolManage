@@ -1,6 +1,7 @@
 angular.module('sbAdminApp')
 .controller('teacherAddCtrl',
-function ($scope, $http, $state, $timeout, Restangular) {
+function ($scope, $http, $state, $timeout, Restangular, $rootScope) {
+  $rootScope.pageTitle = "教师管理 - 添加教师";
   $scope.login().then(function (){
   $scope.school = $scope.currentUser.$related.school;
   $scope.majors = Restangular.all('schools/'+$scope.school.$id.toString()+'/majors').getList().$object;

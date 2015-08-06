@@ -1,6 +1,7 @@
 angular.module('sbAdminApp')
 .controller('teacherManageCtrl',
-function ($scope, $http, $state, $modal, $timeout, Restangular) {
+function ($scope, $http, $state, $modal, $timeout, Restangular, $rootScope) {
+  $rootScope.pageTitle = "教师管理 - 详细管理";
   $scope.login().then(function (){
     $scope.school = $scope.currentUser.$related.school;
 
@@ -55,7 +56,7 @@ function ($scope, $http, $state, $modal, $timeout, Restangular) {
         })
       }
     };
-    
+
     $scope.teacherremove = function() {
       if ($scope.user.$id != null) {
         var id = $scope.user.$id;

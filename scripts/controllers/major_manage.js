@@ -1,6 +1,7 @@
 angular.module('sbAdminApp')
 .controller('majorManageCtrl',
-function ($scope, $http, $state, $modal, $timeout, Restangular) {
+function ($scope, $http, $state, $modal, $timeout, Restangular, $rootScope) {
+  $rootScope.pageTitle = "专业管理 - 详细管理";
   $scope.login().then(function (){
     $scope.school = $scope.currentUser.$related.school;
     $scope.majors = Restangular.all('schools/'+$scope.school.$id.toString()+'/majors').getList().$object;
