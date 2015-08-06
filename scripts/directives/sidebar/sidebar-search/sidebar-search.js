@@ -15,8 +15,11 @@ angular.module('sbAdminApp')
       replace: true,
       scope: {
       },
-      controller:function($scope){
-        $scope.selectedMenu = 'home';
+      controller:function($scope,$window,$location){
+        $scope.search = function(searchText)
+        {
+          $window.location.href = 'http://www.baidu.com/s?wd=site:'+$location.host()+'%20'+$scope.searchText;
+        }
       }
     }
   });
