@@ -4,7 +4,7 @@ function ($scope, $http, $state, $modal, $timeout, Restangular, $filter, dateFil
   $rootScope.pageTitle = "课程管理 - 详细管理";
   $scope.login().then(function() {
     $scope.school = $scope.currentUser.$related.school;
-
+    var schoolid = $scope.school.$id;
     Restangular.all('schools/' + $scope.school.$id.toString() + '/majors').getList().then(function(majors) {
       $scope.majors = majors;
       $scope.major = $scope.majors[0];
